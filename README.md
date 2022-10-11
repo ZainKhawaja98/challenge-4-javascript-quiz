@@ -1,24 +1,17 @@
+https://zainkhawaja98.github.io/challenge-4-javascript-quiz/
 # challenge-4-javascript-quiz
 
 ## Description
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
-
+The purpose of this website is to study questions related to javascript. It will keep track of the number of questions correct and will display your score so you can see how you rank among others or your previous attempts. I built this website so I have an interactive way of studying that will be more effective than flash cards or other studying methods. I learned how to create a timer that will decrease in time and how to create arrays. 
 
 ## Installation
 
 N/A
 
 ## Usage
-Provide instructions and examples for use. Include screenshots as needed.
+In order to use the website, press the start quiz button. A question will appear with 4 answers and the correct answer needs to be selected. An incorrect answer will still move on to the next question but will decrease the timer by 15 seconds. When all questions are answered or the timer runs out, the quiz will end and the user will input their initials in the highscore.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README using the following syntax:
-
-![alt text](assets/images/screenshot.png)
+![alt text](assets/images/website.png)
 
 
 ## Credits
