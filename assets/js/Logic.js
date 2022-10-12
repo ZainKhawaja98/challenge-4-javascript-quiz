@@ -16,16 +16,18 @@ var feedbackEl = document.getElementById('feedback');
 var sfxRight = new Audio('assets/sfx/correct.wav');
 var sfxWrong = new Audio('assets/sfx/incorrect.wav');
 
+startBtn.addEventListener ("click", startQuiz);
 
 function startQuiz() {
     // hide start screen
-
+var startScreenEl = document.getElementById('start-screen')
+startScreenEl.setAttribute('class', 'hide')
     // un-hide questions section
-
+questionsEl.removeAttribute('class')
     //start timer (high)
-
+setInterval(clockTick, 1000) 
     //show starting time (high)
-
+    timerEl.textContent = time;
     getQuestion();
 }
 
@@ -38,15 +40,21 @@ function getQuestion() { //this function is going to get the data from the quest
     titleEl.textContent = currentQuestion.title;
 
     // clear out any old question choices
-    choicesEl.innerHTML = ''; //Study this later
+    choicesEl.innerHTML = '';
 
     // create a for loop that creates the choice elements
     for (var i = 0; i < currentQuestion.choices.length; i++) {
         // create new button for each choice
-        //.createElement
+        var choice = currentQuestion.choices[i] ;
+         //.createElement
+        var buttonEl = document.createElement('button')
         //.setAttribute (set a class="choice")
+        buttonEl.setAttribute('class', "choice")
+        buttonEl.setAttribute('value', choice)
         //.textContent
+        buttonEl.textContent = 1 + 1 + ')' + choice;
         //.appendChild
+        choicesEl.appendChild(buttonEl)
     }
 }
 
@@ -59,18 +67,29 @@ function questionClick(event) {
     }
 
     // check if user guessed right or wrong
-    if (true) { //replace true with a conditional statement that checks if the clicked choice button's value is the same as the questions[currentQuestionIndex]'s answer
+    if (buttonEl.value !== questions[currentQuestionIndex].answer) { //replace true with a conditional statement that checks if the clicked choice button's value is the same as the questions[currentQuestionIndex]'s answer
         //incorrect answer scenario
 
         // penalize time
+        time -= 15;
+        if (time < 0) {
+            time = 0;
+        }
+
         // display new time on page
+        timerEl.textContent = time;
+
+        feedbackEl.textContent = "Wrong answer!"
     } else {
         //correct scenario
-
+        feedbackEl.textContent = "Correct!"
         // move to next question
     }
     // flash right/wrong feedback on page
-
+feedbackEl.setAttribute('class', 'feedback');
+setTimeout(function () {
+    feedbackEl.setAttribute('class', 'feedback hide');
+}, 1000);
     // move to next question
     currentQuestionIndex++;
 
@@ -119,13 +138,17 @@ function saveHighscore() {
 
         //JSON.parse
         // get saved scores from localstorage (highscores), or if not any, set to empty array
-        
+        var highscores = JSON.parse(window.localStorage.getItem('highscores')) || [];
 
         // format new score object for current user
-        
+        var newScore = {
+            score: time,
+            initials
+        };
 
         // save to localstorage
-        
+        highscores.push(newScore);
+        window.localStorage.setItem('highscores', JSON.stringify(highscores));
 
         // redirect to next page
         window.location.href = 'highscores.html';
