@@ -25,7 +25,7 @@ startScreenEl.setAttribute('class', 'hide')
     // un-hide questions section
 questionsEl.removeAttribute('class')
     //start timer (high)
-setInterval(clockTick, 1000) 
+setInterval(clockTick, 2000) 
     //show starting time (high)
     timerEl.textContent = time;
     getQuestion();
